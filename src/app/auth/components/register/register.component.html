@@ -30,7 +30,10 @@
                      formControlName="password"
               />
             </fieldset>
-            <button class="btn-lg btn-primary pull-xs-right" type="submit">Sign up</button>
+            <button class="btn-lg btn-primary pull-xs-right"
+                    type="submit"
+                    [disabled]="isSubmitting$ | async"
+            >Sign up</button>
           </fieldset>
         </form>
       </div>
