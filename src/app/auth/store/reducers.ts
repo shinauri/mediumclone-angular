@@ -7,10 +7,15 @@ import {
     registerSuccessAction,
 } from 'src/app/auth/store/actions/register.action'
 import {
-    registerOperation,
-    registerSuccessOperation,
-    registerFailureOperation,
-} from 'src/app/auth/store/operations/auth.operations'
+    loginAction,
+    loginFailureAction,
+    loginSuccessAction,
+} from 'src/app/auth/store/actions/login.action'
+import {
+    startOperation,
+    successOperation,
+    failureOperation,
+} from 'src/app/auth/store/operations/reducer.operations'
 
 const initialState: AuthStateInterface = {
     isSubmitting: false,
@@ -21,9 +26,12 @@ const initialState: AuthStateInterface = {
 
 const authReducer = createReducer(
     initialState,
-    on(registerAction, registerOperation),
-    on(registerSuccessAction, registerSuccessOperation),
-    on(registerFailureAction, registerFailureOperation)
+    on(registerAction, startOperation),
+    on(registerSuccessAction, successOperation),
+    on(registerFailureAction, failureOperation),
+    on(loginAction, startOperation),
+    on(loginSuccessAction, successOperation),
+    on(loginFailureAction, failureOperation)
 )
 
 export function reducers(
