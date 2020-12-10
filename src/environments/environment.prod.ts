@@ -1,3 +1,6 @@
+import { appEnvs } from 'src/environments/appEnvs'
+
 export const environment = {
-  production: true
-};
+    production: true,
+    ...appEnvs,
+}
