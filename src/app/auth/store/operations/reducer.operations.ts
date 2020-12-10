@@ -2,7 +2,7 @@ import { AuthStateInterface } from 'src/app/auth/types/authState.interface'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface'
 
-export const registerOperation = (
+export const startOperation = (
     state: AuthStateInterface
 ): AuthStateInterface => ({
     ...state,
@@ -10,7 +10,7 @@ export const registerOperation = (
     validationErrors: null,
 })
 
-export const registerSuccessOperation = (
+export const successOperation = (
     state: AuthStateInterface,
     action: { currentUser: CurrentUserInterface }
 ): AuthStateInterface => ({
@@ -20,7 +20,7 @@ export const registerSuccessOperation = (
     currentUser: action.currentUser,
 })
 
-export const registerFailureOperation = (
+export const failureOperation = (
     state: AuthStateInterface,
     action: { errors: BackendErrorsInterface }
 ): AuthStateInterface => ({

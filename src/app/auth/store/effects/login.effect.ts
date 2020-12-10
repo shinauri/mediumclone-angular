@@ -5,19 +5,19 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { of } from 'rxjs'
 
 import {
-    registerAction,
-    registerFailureAction,
-    registerSuccessAction,
-} from 'src/app/auth/store/actions/register.action'
+    loginAction,
+    loginFailureAction,
+    loginSuccessAction,
+} from 'src/app/auth/store/actions/login.action'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import { AuthEffect } from 'src/app/auth/store/effects/auth.effect'
 
 @Injectable()
-export class RegisterEffect extends AuthEffect {
+export class LoginEffect extends AuthEffect {
     private redirectAfterSubmit = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(registerSuccessAction),
+                ofType(loginSuccessAction),
                 tap(() => {
                     this.router.navigateByUrl('/')
                 })
@@ -25,12 +25,12 @@ export class RegisterEffect extends AuthEffect {
         { dispatch: false }
     )
 
-    private register$ = createEffect(() =>
+    private login$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(registerAction),
+            ofType(loginAction),
             switchMap(({ request }) => {
                 return this.authService
-                    .register(request)
+                    .login(request)
                     .pipe(
                         map(this.successCallback),
                         catchError(this.errorCallback)
@@ -41,12 +41,12 @@ export class RegisterEffect extends AuthEffect {
 
     private successCallback = (currentUser: CurrentUserInterface) => {
         this.persistenceService.set('accessToken', currentUser.token)
-        return registerSuccessAction({ currentUser })
+        return loginSuccessAction({ currentUser })
     }
 
     private errorCallback = (errorResponse: HttpErrorResponse) => {
         return of(
-            registerFailureAction({
+            loginFailureAction({
                 errors: errorResponse.error.errors,
             })
         )
