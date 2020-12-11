@@ -16,21 +16,30 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + '/users'
-        return this.getUser(url, data)
+        const url = environment.apiUrl + environment.endpoints.users
+        return this.fetchUser(url, data)
     }
 
     login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + '/users/login'
-        return this.getUser(url, data)
+        const url = environment.apiUrl + environment.endpoints.login
+        return this.fetchUser(url, data)
     }
 
-    private getUser(
+    getCurrentUser(): Observable<CurrentUserInterface> {
+        const url = environment.apiUrl + environment.endpoints.user
+        return this.http.get(url).pipe(map(this.getUser))
+    }
+
+    private fetchUser(
         url: string,
         data: AuthRequest
     ): Observable<CurrentUserInterface> {
         return this.http
             .post<AuthResponseInterface>(url, data)
-            .pipe(map((response: AuthResponseInterface) => response.user))
+            .pipe(map(this.getUser))
+    }
+
+    private getUser(response: AuthResponseInterface): CurrentUserInterface {
+        return response.user
     }
 }

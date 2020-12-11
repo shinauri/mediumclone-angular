@@ -11,6 +11,7 @@ import {
 } from 'src/app/auth/store/actions/register.action'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import { AuthEffect } from 'src/app/auth/store/effects/auth.effect'
+import { environment } from 'src/environments/environment'
 
 @Injectable()
 export class RegisterEffect extends AuthEffect {
@@ -40,7 +41,7 @@ export class RegisterEffect extends AuthEffect {
     )
 
     private successCallback = (currentUser: CurrentUserInterface) => {
-        this.persistenceService.set('accessToken', currentUser.token)
+        this.persistenceService.set(environment.token, currentUser.token)
         return registerSuccessAction({ currentUser })
     }
 
