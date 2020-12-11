@@ -12,26 +12,40 @@ import {
     loginSuccessAction,
 } from 'src/app/auth/store/actions/login.action'
 import {
-    startOperation,
-    successOperation,
-    failureOperation,
-} from 'src/app/auth/store/operations/reducer.operations'
+    getCurrentUserAction,
+    getCurrentUserFailureAction,
+    getCurrentUserSuccessAction,
+} from 'src/app/auth/store/actions/getCurrentUser.action'
+import {
+    authStartOperation,
+    authSuccessOperation,
+    authFailureOperation,
+} from 'src/app/auth/store/operations/authReducer.operations'
+import {
+    getCurrentUserStartOperation,
+    getCurrentUserSuccessOperation,
+    getCurrentUserFailureOperation,
+} from 'src/app/auth/store/operations/getCurrentUserReducer.operations'
 
 const initialState: AuthStateInterface = {
     isSubmitting: false,
-    currentUser: null,
     isLoggedIn: null,
+    isLoading: false,
+    currentUser: null,
     validationErrors: null,
 }
 
 const authReducer = createReducer(
     initialState,
-    on(registerAction, startOperation),
-    on(registerSuccessAction, successOperation),
-    on(registerFailureAction, failureOperation),
-    on(loginAction, startOperation),
-    on(loginSuccessAction, successOperation),
-    on(loginFailureAction, failureOperation)
+    on(registerAction, authStartOperation),
+    on(registerSuccessAction, authSuccessOperation),
+    on(registerFailureAction, authFailureOperation),
+    on(loginAction, authStartOperation),
+    on(loginSuccessAction, authSuccessOperation),
+    on(loginFailureAction, authFailureOperation),
+    on(getCurrentUserAction, getCurrentUserStartOperation),
+    on(getCurrentUserSuccessAction, getCurrentUserSuccessOperation),
+    on(getCurrentUserFailureAction, getCurrentUserFailureOperation)
 )
 
 export function reducers(
