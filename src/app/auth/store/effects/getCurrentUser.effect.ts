@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment'
 
 @Injectable()
 export class GetCurrentUserEffect {
-    private getCurrentUse$ = createEffect(() =>
+    private getCurrentUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getCurrentUserAction),
             switchMap(() => {
