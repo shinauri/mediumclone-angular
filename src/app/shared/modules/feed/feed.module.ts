@@ -10,6 +10,8 @@ import { reducers } from 'src/app/shared/modules/feed/store/redusers'
 import { FeedService } from 'src/app/shared/modules/feed/services/feed.service'
 import { ErrorMessageModule } from 'src/app/shared/modules/errorMesage/components/errorMessage.module'
 import { LoadingModule } from 'src/app/shared/modules/loading/components/loading.module'
+import { PaginationModule } from 'src/app/shared/modules/pagination/pagination.module'
+import { UtilsService } from 'src/app/shared/services/utils.service'
 
 @NgModule({
     imports: [
@@ -19,9 +21,10 @@ import { LoadingModule } from 'src/app/shared/modules/loading/components/loading
         StoreModule.forFeature('feed', reducers),
         ErrorMessageModule,
         LoadingModule,
+        PaginationModule,
     ],
     declarations: [FeedComponent],
     exports: [FeedComponent],
-    providers: [FeedService],
+    providers: [FeedService, UtilsService],
 })
 export class FeedModule {}
