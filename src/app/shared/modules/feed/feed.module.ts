@@ -12,6 +12,7 @@ import { ErrorMessageModule } from 'src/app/shared/modules/errorMesage/component
 import { LoadingModule } from 'src/app/shared/modules/loading/components/loading.module'
 import { PaginationModule } from 'src/app/shared/modules/pagination/pagination.module'
 import { UtilsService } from 'src/app/shared/services/utils.service'
+import { TagListModule } from 'src/app/shared/modules/tagList/tagList.module'
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service'
         ErrorMessageModule,
         LoadingModule,
         PaginationModule,
+        TagListModule,
     ],
     declarations: [FeedComponent],
     exports: [FeedComponent],
