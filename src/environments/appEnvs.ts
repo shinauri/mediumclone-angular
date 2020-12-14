@@ -6,4 +6,5 @@ export const appEnvs = {
         login: '/users/login',
     },
     token: 'accessToken',
+    limit: 10,
 }
