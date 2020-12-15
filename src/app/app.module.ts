@@ -15,6 +15,7 @@ import { PersistenceService } from 'src/app/shared/services/persistence.service'
 import { AuthInterceptorService } from 'src/app/shared/services/authInterceptor.service'
 import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module'
 import { YourFeedModule } from 'src/app/yourFeed/yourFeed.module'
+import { PopularTagsResponseInterceptor } from 'src/app/shared/modules/popularTags/services/popularTagsResponseInterceptor'
 
 @NgModule({
     declarations: [AppComponent],
@@ -39,6 +40,11 @@ import { YourFeedModule } from 'src/app/yourFeed/yourFeed.module'
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptorService,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: PopularTagsResponseInterceptor,
             multi: true,
         },
     ],
