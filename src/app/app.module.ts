@@ -16,6 +16,7 @@ import { AuthInterceptorService } from 'src/app/shared/services/authInterceptor.
 import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module'
 import { YourFeedModule } from 'src/app/yourFeed/yourFeed.module'
 import { PopularTagsResponseInterceptor } from 'src/app/shared/modules/popularTags/services/popularTagsResponseInterceptor'
+import { TagFeedModule } from 'src/app/tagFeed/tagFeed.module'
 
 @NgModule({
     declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { PopularTagsResponseInterceptor } from 'src/app/shared/modules/popularTa
         TopBarModule,
         GlobalFeedModule,
         YourFeedModule,
+        TagFeedModule,
     ],
     providers: [
         PersistenceService,

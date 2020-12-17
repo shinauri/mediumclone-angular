@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import {
+    Component,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
 import { Observable, Subscription } from 'rxjs'
@@ -11,14 +18,13 @@ import {
     isLoadingSelector,
 } from 'src/app/shared/modules/feed/store/selectors'
 import { environment } from 'src/environments/environment'
-import { parseUrl, stringify } from 'query-string'
 import { UtilsService } from 'src/app/shared/services/utils.service'
 
 @Component({
     selector: 'mc-feed',
     templateUrl: './feed.component.html',
 })
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy, OnChanges {
     @Input('apiUrl') apiUrlInput: string
 
     isLoading$: Observable<boolean>
@@ -68,5 +74,20 @@ export class FeedComponent implements OnInit, OnDestroy {
             this.limit
         )
         this.store.dispatch(getFeedAction({ url: apiUriWithParams }))
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.apiUrlChanged(changes)) {
+            this.fetchFeed()
+        }
+    }
+
+    private apiUrlChanged(changes: SimpleChanges): boolean {
+        const apiUrlChanged =
+            !changes.apiUrlInput.firstChange &&
+            changes.apiUrlInput.currentValue !==
+                changes.apiUrlInput.previousValue
+
+        return apiUrlChanged
     }
 }
