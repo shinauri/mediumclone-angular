@@ -16,17 +16,17 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.users
+        const url = environment.apiUrl + environment.endpoints.auth.register
         return this.fetchUser(url, data)
     }
 
     login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.login
+        const url = environment.apiUrl + environment.endpoints.auth.login
         return this.fetchUser(url, data)
     }
 
     getCurrentUser(): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.user
+        const url = environment.apiUrl + environment.endpoints.auth.user
         return this.http.get(url).pipe(map(this.getUser))
     }
 

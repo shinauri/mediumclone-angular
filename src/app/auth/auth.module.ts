@@ -14,14 +14,15 @@ import { BackendErrorMessagesModule } from 'src/app/shared/modules/backendErrorM
 import { PersistenceService } from 'src/app/shared/services/persistence.service'
 import { LoginEffect } from 'src/app/auth/store/effects/login.effect'
 import { GetCurrentUserEffect } from 'src/app/auth/store/effects/getCurrentUser.effect'
+import { environment } from 'src/environments/environment'
 
 const routes: Routes = [
     {
-        path: 'register',
+        path: environment.routes.auth.register,
         component: RegisterComponent,
     },
     {
-        path: 'login',
+        path: environment.routes.auth.login,
         component: LoginComponent,
     },
 ]

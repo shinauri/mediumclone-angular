@@ -33,9 +33,12 @@ export class PopularTagsResponseInterceptor implements HttpInterceptor {
                 if (url.pathname === '/api/tags') {
                     const filteredTags = event.body.tags
                         .map((item) => {
-                            return item.replace(/[\u200B-\u200D\uFEFF]/g, '')
+                            return item
+                            // return item.replace(/[\u200B-\u200D\uFEFF]/g, '')
                         })
-                        .filter((item) => item !== '')
+                        .filter((item) => {
+                            return !item.match(/[\u200B-\u200D\uFEFF]/g, '')
+                        })
 
                     event = event.clone({
                         body: {
