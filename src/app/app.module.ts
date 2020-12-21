@@ -17,6 +17,7 @@ import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module'
 import { YourFeedModule } from 'src/app/yourFeed/yourFeed.module'
 import { PopularTagsResponseInterceptor } from 'src/app/shared/modules/popularTags/services/popularTagsResponseInterceptor'
 import { TagFeedModule } from 'src/app/tagFeed/tagFeed.module'
+import { ArticleModule } from 'src/app/article/article.module'
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { TagFeedModule } from 'src/app/tagFeed/tagFeed.module'
         GlobalFeedModule,
         YourFeedModule,
         TagFeedModule,
+        ArticleModule,
     ],
     providers: [
         PersistenceService,
