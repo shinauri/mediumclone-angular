@@ -10,6 +10,9 @@ export const appEnvs = {
             your: 'feed',
             tag: 'tags/:slug',
         },
+        articles: {
+            article: 'articles/:slug',
+        },
     },
     endpoints: {
         auth: {
@@ -21,6 +24,9 @@ export const appEnvs = {
             global: '/articles',
             your: '/articles/feed',
             tag: '/articles?tag=',
+        },
+        articles: {
+            article: '/articles',
         },
     },
     token: 'accessToken',
