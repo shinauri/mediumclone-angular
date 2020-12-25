@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store'
-
 import { routerNavigationAction } from '@ngrx/router-store'
+
 import { ArticleStateInterface } from 'src/app/article/types/articleState.interface'
 import {
     getArticleAction,

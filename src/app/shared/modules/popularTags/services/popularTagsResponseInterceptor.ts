@@ -7,7 +7,7 @@ import {
     HttpResponse,
 } from '@angular/common/http'
 
-import { Observable } from 'rxjs'
+import { Observable, throwError } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 
 @Injectable()
@@ -20,7 +20,7 @@ export class PopularTagsResponseInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             map(this.removeZWNJFromResponseArray),
             catchError((err, caught) => {
-                return caught
+                return throwError(err)
             })
         )
     }
