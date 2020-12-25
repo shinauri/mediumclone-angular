@@ -13,6 +13,7 @@ export const appEnvs = {
         articles: {
             article: 'articles/:slug',
             create: 'articles/new',
+            edit: 'articles/:slug/edit',
         },
     },
     endpoints: {

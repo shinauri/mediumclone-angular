@@ -1,25 +1,25 @@
-import { ArticleStateInterface } from 'src/app/article/types/articleState.interface'
+import { EditArticleStateInterface } from 'src/app/editArticle/types/editArticleState.interface'
 import { GetArticleResponseInterface } from 'src/app/shared/types/getArticleResponse.interface'
 
 export const getArticleOperation = (
-    state: ArticleStateInterface
-): ArticleStateInterface => ({
+    state: EditArticleStateInterface
+): EditArticleStateInterface => ({
     ...state,
     isLoading: true,
 })
 
 export const getArticleSuccessOperation = (
-    state: ArticleStateInterface,
+    state: EditArticleStateInterface,
     action: GetArticleResponseInterface
-): ArticleStateInterface => ({
+): EditArticleStateInterface => ({
     ...state,
     isLoading: false,
-    data: action.article,
+    article: action.article,
 })
 
 export const getArticleFailureOperation = (
-    state: ArticleStateInterface
-): ArticleStateInterface => ({
+    state: EditArticleStateInterface
+): EditArticleStateInterface => ({
     ...state,
     isLoading: false,
 })
