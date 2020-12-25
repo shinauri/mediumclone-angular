@@ -19,6 +19,7 @@ import { PopularTagsResponseInterceptor } from 'src/app/shared/modules/popularTa
 import { TagFeedModule } from 'src/app/tagFeed/tagFeed.module'
 import { ArticleModule } from 'src/app/article/article.module'
 import { CreateArticleModule } from 'src/app/createArticle/createArticle.module'
+import { EditArticleModule } from 'src/app/editArticle/editArticle.module'
 
 @NgModule({
     declarations: [AppComponent],
@@ -40,6 +41,7 @@ import { CreateArticleModule } from 'src/app/createArticle/createArticle.module'
         TagFeedModule,
         CreateArticleModule,
         ArticleModule,
+        EditArticleModule,
     ],
     providers: [
         PersistenceService,
