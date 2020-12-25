@@ -12,6 +12,7 @@ export const appEnvs = {
         },
         articles: {
             article: 'articles/:slug',
+            create: 'articles/new',
         },
     },
     endpoints: {
@@ -27,6 +28,7 @@ export const appEnvs = {
         },
         articles: {
             article: '/articles',
+            articlePage: '/article',
         },
     },
     token: 'accessToken',
