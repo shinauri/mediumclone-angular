@@ -1,5 +1,5 @@
 import { ArticleStateInterface } from 'src/app/article/types/articleState.interface'
-import { ArticleInterface } from 'src/app/shared/types/article.interface'
+import { GetArticleResponseInterface } from 'src/app/shared/types/getArticleResponse.interface'
 
 export const getArticleOperation = (
     state: ArticleStateInterface
@@ -10,7 +10,7 @@ export const getArticleOperation = (
 
 export const getArticleSuccessOperation = (
     state: ArticleStateInterface,
-    action: { article: ArticleInterface }
+    action: GetArticleResponseInterface
 ): ArticleStateInterface => ({
     ...state,
     isLoading: false,
