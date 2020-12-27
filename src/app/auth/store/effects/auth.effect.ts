@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core'
 
 @Injectable()
 export abstract class AuthEffect {
+    abstract readonly authUrl: string
+
     constructor(
         protected actions$: Actions,
         protected authService: AuthService,

@@ -11,17 +11,13 @@ import { LoginRequestInterface } from 'src/app/auth/types/loginRequest.interface
 
 type AuthRequest = RegisterRequestInterface | LoginRequestInterface
 
+type authRequestInterface = RegisterRequestInterface | LoginRequestInterface
+
 @Injectable()
 export class AuthService {
     constructor(private http: HttpClient) {}
 
-    register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.auth.register
-        return this.fetchUser(url, data)
-    }
-
-    login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.auth.login
+    auth(data: authRequestInterface, url): Observable<CurrentUserInterface> {
         return this.fetchUser(url, data)
     }
 

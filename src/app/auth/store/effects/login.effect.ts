@@ -15,6 +15,8 @@ import { environment } from 'src/environments/environment'
 
 @Injectable()
 export class LoginEffect extends AuthEffect {
+    readonly authUrl = environment.apiUrl + environment.endpoints.auth.login
+
     private redirectAfterSubmit = createEffect(
         () =>
             this.actions$.pipe(
@@ -31,7 +33,7 @@ export class LoginEffect extends AuthEffect {
             ofType(loginAction),
             switchMap(({ request }) => {
                 return this.authService
-                    .login(request)
+                    .auth(request, this.authUrl)
                     .pipe(
                         map(this.successCallback),
                         catchError(this.errorCallback)
