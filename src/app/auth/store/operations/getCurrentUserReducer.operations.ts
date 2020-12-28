@@ -1,7 +1,8 @@
 import { AuthStateInterface } from 'src/app/auth/types/authState.interface'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
+import { CurrentUserSuccessActionProps } from 'src/app/auth/types/currentUserSeccessActionProps.type'
 
-export const getCurrentUserStartOperation = (
+export const getCurrentUserOperation = (
     state: AuthStateInterface
 ): AuthStateInterface => ({
     ...state,
@@ -10,7 +11,7 @@ export const getCurrentUserStartOperation = (
 
 export const getCurrentUserSuccessOperation = (
     state: AuthStateInterface,
-    action: { currentUser: CurrentUserInterface }
+    action: CurrentUserSuccessActionProps
 ): AuthStateInterface => ({
     ...state,
     isLoading: false,
