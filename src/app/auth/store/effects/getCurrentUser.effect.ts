@@ -25,8 +25,9 @@ export class GetCurrentUserEffect {
                     return of(getCurrentUserFailureAction())
                 }
 
+                const url = environment.apiUrl + environment.endpoints.auth.user
                 return this.authService
-                    .getCurrentUser()
+                    .getCurrentUser(url)
                     .pipe(
                         map(this.successCallback),
                         catchError(this.errorCallback)

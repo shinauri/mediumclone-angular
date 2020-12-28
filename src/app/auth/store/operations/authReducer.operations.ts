@@ -1,6 +1,6 @@
 import { AuthStateInterface } from 'src/app/auth/types/authState.interface'
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
-import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface'
+import { CurrentUserSuccessActionProps } from 'src/app/auth/types/currentUserSeccessActionProps.type'
+import { RequestFailureActionProps } from 'src/app/shared/types/requestFailureActionProps.type'
 
 export const authStartOperation = (
     state: AuthStateInterface
@@ -12,7 +12,7 @@ export const authStartOperation = (
 
 export const authSuccessOperation = (
     state: AuthStateInterface,
-    action: { currentUser: CurrentUserInterface }
+    action: CurrentUserSuccessActionProps
 ): AuthStateInterface => ({
     ...state,
     isSubmitting: false,
@@ -22,7 +22,7 @@ export const authSuccessOperation = (
 
 export const authFailureOperation = (
     state: AuthStateInterface,
-    action: { errors: BackendErrorsInterface }
+    action: RequestFailureActionProps
 ): AuthStateInterface => ({
     ...state,
     isSubmitting: false,

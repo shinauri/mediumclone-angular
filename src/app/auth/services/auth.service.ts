@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { environment } from 'src/environments/environment'
 import { RegisterRequestInterface } from 'src/app/auth/types/registerRequest.interface'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import { AuthResponseInterface } from 'src/app/auth/types/authResponse.interface'
 import { LoginRequestInterface } from 'src/app/auth/types/loginRequest.interface'
+import { CurrentUserInputInterface } from 'src/app/shared/types/currentUserInput.interface'
 
 type AuthRequest = RegisterRequestInterface | LoginRequestInterface
 
@@ -15,13 +15,27 @@ type AuthRequest = RegisterRequestInterface | LoginRequestInterface
 export class AuthService {
     constructor(private http: HttpClient) {}
 
+    private static getUser(
+        response: AuthResponseInterface
+    ): CurrentUserInterface {
+        return response.user
+    }
+
     auth(data: AuthRequest, url): Observable<CurrentUserInterface> {
         return this.fetchUser(url, data)
     }
 
-    getCurrentUser(): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + environment.endpoints.auth.user
-        return this.http.get(url).pipe(map(this.getUser))
+    getCurrentUser(url): Observable<CurrentUserInterface> {
+        return this.http.get(url).pipe(map(AuthService.getUser))
+    }
+
+    updateCurrentUser(
+        currentUserInput: CurrentUserInputInterface,
+        url: string
+    ): Observable<CurrentUserInterface> {
+        return this.http
+            .put(url, currentUserInput)
+            .pipe(map(AuthService.getUser))
     }
 
     private fetchUser(
@@ -30,10 +44,6 @@ export class AuthService {
     ): Observable<CurrentUserInterface> {
         return this.http
             .post<AuthResponseInterface>(url, data)
-            .pipe(map(this.getUser))
-    }
-
-    private getUser(response: AuthResponseInterface): CurrentUserInterface {
-        return response.user
+            .pipe(map(AuthService.getUser))
     }
 }
