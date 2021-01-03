@@ -1,5 +1,7 @@
 export const appEnvs = {
     apiUrl: 'https://conduit.productionready.io/api',
+    token: 'accessToken',
+    limit: 10,
     routes: {
         auth: {
             login: 'login',
@@ -32,6 +34,4 @@ export const appEnvs = {
             articlePage: '/article',
         },
     },
-    token: 'accessToken',
-    limit: 10,
 }
