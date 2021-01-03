@@ -12,7 +12,7 @@ import { UpdateArticleService } from 'src/app/editArticle/services/updateArticle
 import { UpdateArticleEffect } from 'src/app/editArticle/store/effects/updateArticle.effect'
 import { GetArticleEffect } from 'src/app/editArticle/store/effects/getArticle.effect'
 import { reducers } from 'src/app/editArticle/store/reducers'
-import { LoadingModule } from 'src/app/shared/modules/loading/components/loading.module'
+import { LoadingModule } from 'src/app/shared/modules/loading/loading.module'
 
 const routes = [
     {

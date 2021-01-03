@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 
 import { FeedModule } from 'src/app/shared/modules/feed/feed.module'
-import { BannerModule } from 'src/app/shared/modules/banner/components/banner.module'
+import { BannerModule } from 'src/app/shared/modules/banner/banner.module'
 import { PopularTagsModule } from 'src/app/shared/modules/popularTags/popularTags.module'
 import { FeedTogglerModule } from 'src/app/shared/modules/feedToggler/feedToggler.module'
 import { environment } from 'src/environments/environment'
