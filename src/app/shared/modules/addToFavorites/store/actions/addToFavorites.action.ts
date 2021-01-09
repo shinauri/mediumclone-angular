@@ -5,7 +5,7 @@ import { ArticleInterface } from 'src/app/shared/types/article.interface'
 
 export const addToFavoritesAction = createAction(
     ActionTypes.ADD_TO_FAVORITES,
-    props<{ isFavorited: boolean; slug: string }>()
+    props<{ isFavorited: boolean; url: string }>()
 )
 
 export const addToFavoritesSuccessAction = createAction(

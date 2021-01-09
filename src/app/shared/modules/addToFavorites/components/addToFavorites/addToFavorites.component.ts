@@ -10,7 +10,7 @@ import { addToFavoritesAction } from 'src/app/shared/modules/addToFavorites/stor
 })
 export class AddToFavoritesComponent implements OnInit {
     @Input('isFavorited') isFavoritedInput: boolean
-    @Input('articleSlug') articleSlugInput: string
+    @Input('articleUrl') articleUrlInput: string
     @Input('favoritesCount') favoritesCountInput: number
 
     favoritesCount: number
@@ -27,7 +27,7 @@ export class AddToFavoritesComponent implements OnInit {
         this.store.dispatch(
             addToFavoritesAction({
                 isFavorited: this.isFavorited,
-                slug: this.articleSlugInput,
+                url: this.articleUrlInput,
             })
         )
         if (this.isFavorited) {
