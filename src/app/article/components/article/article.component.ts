@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest, Observable, Subscription } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 
 import { ArticleInterface } from 'src/app/shared/types/article.interface'
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
@@ -64,17 +64,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     private isAuthor(): Observable<boolean> {
         return combineLatest([
-            this.store.pipe(select(articleSelector)),
-            this.store.pipe(select(currentUserSelector)),
+            this.store.pipe(select(articleSelector), filter(Boolean)),
+            this.store.pipe(select(currentUserSelector), filter(Boolean)),
         ]).pipe(
             map(
                 ([article, currentUser]: [
-                    ArticleInterface | null,
-                    CurrentUserInterface | null
+                    ArticleInterface,
+                    CurrentUserInterface
                 ]) => {
-                    if (!article || !currentUser) {
-                        return false
-                    }
                     return article.author.username === currentUser.username
                 }
             )

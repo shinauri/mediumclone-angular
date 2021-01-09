@@ -17,6 +17,10 @@ export const appEnvs = {
             create: 'articles/new',
             edit: 'articles/:slug/edit',
         },
+        profile: {
+            home: 'profiles/:slug',
+            favorites: 'profiles/:slug/favorites',
+        },
     },
     endpoints: {
         auth: {
@@ -32,6 +36,9 @@ export const appEnvs = {
         articles: {
             article: '/articles',
             articlePage: '/article',
+        },
+        profiles: {
+            profile: '/profiles',
         },
     },
 }
