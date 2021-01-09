@@ -42,13 +42,19 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
         private utilsService: UtilsService
     ) {}
 
+    ngOnDestroy(): void {
+        this.queryParamsSubscription.unsubscribe()
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.apiUrlChanged(changes)) {
+            this.fetchFeed()
+        }
+    }
+
     ngOnInit(): void {
         this.initializeValues()
         this.initializeListeners()
-    }
-
-    ngOnDestroy(): void {
-        this.queryParamsSubscription.unsubscribe()
     }
 
     private initializeValues(): void {
@@ -76,18 +82,15 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
         this.store.dispatch(getFeedAction({ url: apiUriWithParams }))
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (this.apiUrlChanged(changes)) {
-            this.fetchFeed()
-        }
-    }
-
     private apiUrlChanged(changes: SimpleChanges): boolean {
-        const apiUrlChanged =
+        return (
             !changes.apiUrlInput.firstChange &&
             changes.apiUrlInput.currentValue !==
                 changes.apiUrlInput.previousValue
+        )
+    }
 
-        return apiUrlChanged
+    public getArticleUrl(slug: string): string {
+        return `${environment.apiUrl}/articles/${slug}/favorite`
     }
 }

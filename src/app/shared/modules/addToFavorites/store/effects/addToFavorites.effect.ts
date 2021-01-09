@@ -11,13 +11,6 @@ import {
     addToFavoritesFailureAction,
     addToFavoritesSuccessAction,
 } from 'src/app/shared/modules/addToFavorites/store/actions/addToFavorites.action'
-import { environment } from 'src/environments/environment'
-
-class Api {
-    url(): string {
-        return ''
-    }
-}
 
 @Injectable()
 export class AddToFavoritesEffect {
@@ -34,8 +27,7 @@ export class AddToFavoritesEffect {
         return createEffect(() =>
             this.actions$.pipe(
                 ofType(addToFavoritesAction),
-                switchMap(({ isFavorited, slug }) => {
-                    const url = `${environment.apiUrl}/articles/${slug}/favorite`
+                switchMap(({ isFavorited, url }) => {
                     const article$ = isFavorited
                         ? this.addToFavoritesService.removeFromFavorites(url)
                         : this.addToFavoritesService.addToFavorites(url)

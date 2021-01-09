@@ -16,7 +16,7 @@
       <div class="pull-xs-right">
         <mc-add-to-favorites
           [isFavorited]="article.favorited"
-          [articleSlug]="article.slug"
+          [articleUrl]="getArticleUrl(article.slug)"
           [favoritesCount]="article.favoritesCount"
         >
         </mc-add-to-favorites>
