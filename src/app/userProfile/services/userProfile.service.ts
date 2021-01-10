@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { ProfileInterface } from 'src/app/shared/types/profile.interface'
-import { GetUserProfileResponseInterface } from 'src/app/userProfile/types/getUserProfileResponse.interface'
+import { GetUserProfileResponseInterface } from 'src/app/shared/types/getUserProfileResponse.interface'
 
 @Injectable()
 export class UserProfileService {
