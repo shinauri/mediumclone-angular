@@ -11,6 +11,7 @@ import { GetUserProfileEffect } from 'src/app/userProfile/store/effects/getUserP
 import { reducers } from 'src/app/userProfile/store/reducers'
 import { FeedModule } from 'src/app/shared/modules/feed/feed.module'
 import { LoadingModule } from 'src/app/shared/modules/loading/loading.module'
+import { FollowModule } from 'src/app/shared/modules/follow/follow.module'
 
 const routes = [
     {
@@ -31,6 +32,7 @@ const routes = [
         StoreModule.forFeature('userProfile', reducers),
         FeedModule,
         LoadingModule,
+        FollowModule,
     ],
     declarations: [UserProfileComponent],
     providers: [UserProfileService],

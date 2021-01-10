@@ -15,6 +15,8 @@ import {
 } from 'src/app/userProfile/store/selectors'
 import { currentUserSelector } from 'src/app/auth/store/selectors'
 
+type CurrentUser = { isCurrent: boolean }
+
 @Component({
     selector: 'mc-user-profile',
     templateUrl: './userProfile.component.html',
@@ -23,7 +25,7 @@ import { currentUserSelector } from 'src/app/auth/store/selectors'
 export class UserProfileComponent implements OnInit, OnDestroy {
     isLoading$: Observable<boolean>
     error$: Observable<string | null>
-    isCurrentUserProfile$: Observable<boolean>
+    profile$: Observable<CurrentUser>
     userProfileSubscription: Subscription
 
     userProfile: ProfileInterface
@@ -51,7 +53,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private initializeValues(): void {
         this.isLoading$ = this.store.pipe(select(isLoadingSelector))
         this.error$ = this.store.pipe(select(errorSelector))
-        this.isCurrentUserProfile$ = this.isCurrentUserProfile()
+        this.profile$ = this.isCurrentUser()
     }
 
     private initializeListeners(): void {
@@ -90,7 +92,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             : `/articles?author=${this.slug}`
     }
 
-    private isCurrentUserProfile(): Observable<boolean> {
+    public getProfileUrl(userName: string): string {
+        return `${environment.apiUrl}/profiles/${userName}/follow`
+    }
+
+    private isCurrentUser(): Observable<CurrentUser> {
         return combineLatest([
             this.store.pipe(select(userProfileSelector), filter(Boolean)),
             this.store.pipe(select(currentUserSelector), filter(Boolean)),
@@ -100,7 +106,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                     ProfileInterface,
                     CurrentUserInterface
                 ]) => {
-                    return currentUser.username === userProfile.username
+                    const isCurrent =
+                        currentUser.username === userProfile.username
+                    return { isCurrent }
                 }
             )
         )
