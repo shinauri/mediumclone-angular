@@ -1,0 +1,15 @@
+<button
+  (click)="handleFollow()"
+  [ngClass]="{
+    'btn': true,
+    'btn-sm': true,
+    'btn-primary': isFollowed,
+    'btn-outline-primary': !isFollowed
+  }">
+  <i [ngClass]="{
+    'ion-plus-round': !isFollowed,
+    'ion-minus-round': isFollowed
+    }"
+  ></i>
+  {{ (isFollowed ? 'Unfollow' : 'follow') + ' ' + userName }}
+</button>
