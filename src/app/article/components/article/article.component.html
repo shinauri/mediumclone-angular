@@ -1,6 +1,6 @@
 <div class="article-page">
-  <div class="banner">
-    <div class="container" *ngIf="article">
+    <div class="banner">
+      <div class="container" *ngIf="article">
       <h1>{{ article.title }}</h1>
       <div class="article-meta">
         <a [routerLink]="['/profiles', article.author.username]">
@@ -28,10 +28,25 @@
             Delete Article
           </button>
         </span>
+        <span *ngIf="!(isAuthor$ | async)">
+           <mc-follow
+             [isFollowed]="article.author.following"
+             [followUrl]="getProfileUrl(article.author.username)"
+             [userName]="article.author.username"
+           ></mc-follow>
+          &nbsp;
+          <mc-add-to-favorites
+            [isFavorited]="article.favorited"
+            [articleSlug]="article.slug"
+            [favoritesCount]="article.favoritesCount"
+            [btnText] = "''"
+          >
+        </mc-add-to-favorites>
+        </span>
       </div>
     </div>
-  </div>
-   <div class="container page">
+    </div>
+    <div class="container page">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
       <mc-error-message *ngIf="error$ | async"></mc-error-message>
 
@@ -43,5 +58,13 @@
          <mc-tag-list [tags]="article.tagList"></mc-tag-list>
        </div>
      </div>
-   </div>
+     <hr>
+     <div class="row">
+       <div class="col-xs-12 col-md-8 offset-md-2">
+         <div>
+
+         </div>
+       </div>
+     </div>
+    </div>
 </div>

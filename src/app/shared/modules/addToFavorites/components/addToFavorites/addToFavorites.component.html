@@ -7,5 +7,7 @@
     'btn-outline-primary': !isFavorited
   }">
   <i class="ion-heart"></i>
+  <span *ngIf="(btnTextInput !== undefined && btnTextInput !== '')">&nbsp;{{btnTextInput}}</span>
+  <span *ngIf="(btnTextInput === '')">&nbsp;{{((isFavorited ? 'Unfavorite' : 'Favorite') + ' '+ ' Article')}}</span>
   <span>&nbsp; {{favoritesCount}}</span>
 </button>
