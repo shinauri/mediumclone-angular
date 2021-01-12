@@ -14,6 +14,8 @@ import { TagListModule } from 'src/app/shared/modules/tagList/tagList.module'
 import { ArticleService } from 'src/app/article/services/article.service'
 import { DeleteArticleEffect } from 'src/app/article/store/effects/deleteArticle.effect'
 import { GetArticleEffect } from 'src/app/article/store/effects/getArticle.effect'
+import { FollowModule } from 'src/app/shared/modules/follow/follow.module'
+import { AddToFavoritesModule } from 'src/app/shared/modules/addToFavorites/addToFavorites.module'
 
 const routes = [
     {
@@ -31,6 +33,8 @@ const routes = [
         ErrorMessageModule,
         LoadingModule,
         TagListModule,
+        FollowModule,
+        AddToFavoritesModule,
     ],
     declarations: [ArticleComponent],
     providers: [ArticleSharedService, ArticleService],

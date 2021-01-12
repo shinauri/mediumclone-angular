@@ -14,6 +14,7 @@ import {
 import { currentUserSelector } from 'src/app/auth/store/selectors'
 import { getArticleAction } from 'src/app/article/store/actions/getArticle.action'
 import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action'
+import { environment } from 'src/environments/environment'
 
 @Component({
     selector: 'mc-article',
@@ -60,6 +61,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     public deleteArticle(): void {
         this.store.dispatch(deleteArticleAction({ slug: this.slug }))
+    }
+
+    public getProfileUrl(userName: string): string {
+        return `${environment.apiUrl}/profiles/${userName}/follow`
     }
 
     private isAuthor(): Observable<boolean> {

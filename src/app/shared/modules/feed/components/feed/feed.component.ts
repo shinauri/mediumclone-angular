@@ -89,8 +89,4 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
                 changes.apiUrlInput.previousValue
         )
     }
-
-    public getArticleUrl(slug: string): string {
-        return `${environment.apiUrl}/articles/${slug}/favorite`
-    }
 }
