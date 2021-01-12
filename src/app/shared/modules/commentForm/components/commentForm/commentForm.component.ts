@@ -2,14 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface'
-import { CommentInputInterface } from 'src/app/shared/modules/comment/types/commentInput.interface'
+import { CommentInputInterface } from 'src/app/shared/modules/commentForm/types/commentInput.interface'
 
 @Component({
     selector: 'mc-comment',
-    templateUrl: './comment.component.html',
-    styleUrls: ['./comment.component.scss'],
+    templateUrl: './commentForm.component.html',
+    styleUrls: ['./commentForm.component.scss'],
 })
-export class CommentComponent implements OnInit {
+export class CommentFormComponent implements OnInit {
     @Input('isSubmitting') isSubmittingInput: boolean
     @Input('errors') errorsInput: BackendErrorsInterface | null
 
