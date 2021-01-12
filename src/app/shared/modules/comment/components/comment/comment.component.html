@@ -1,0 +1,24 @@
+<mc-backend-error-messages
+  *ngIf="errorsInput"
+  [backendErrors]="errorsInput"
+></mc-backend-error-messages>
+<form class="card comment-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <div class="card-block">
+     <textarea
+       class="form-control ng-valid ng-pristine ng-touched"
+       placeholder="Write a comment..."
+       rows="3"
+       formControlName="body"
+     ></textarea>
+    </div>
+    <div class="card-footer">
+      <img class="comment-author-img" src="null">
+      <button
+        class="btn btn-sm btn-primary"
+        type="submit"
+        [disabled]="form.invalid || isSubmittingInput"
+      > Post Comment </button>
+    </div>
+  </fieldset>
+</form>
