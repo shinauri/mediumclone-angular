@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core'
 
 @Component({
     selector: 'mc-loading',
-    template: '<div>Loading...</div>',
+    template: '<div>{{loadingTextInput}}</div>',
 })
-export class LoadingComponent {}
+export class LoadingComponent {
+    @Input('loadingText') loadingTextInput: undefined | string = 'Loading...'
+}

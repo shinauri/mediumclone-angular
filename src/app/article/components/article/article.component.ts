@@ -1,20 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
-import { combineLatest, Observable, Subscription } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
+import { Observable, Subscription } from 'rxjs'
 
 import { ArticleInterface } from 'src/app/shared/types/article.interface'
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import {
     articleSelector,
     errorSelector,
     isLoadingSelector,
 } from 'src/app/article/store/selectors'
-import { currentUserSelector } from 'src/app/auth/store/selectors'
 import { getArticleAction } from 'src/app/article/store/actions/getArticle.action'
 import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action'
 import { environment } from 'src/environments/environment'
+import { IsService } from 'src/app/shared/services/is.service'
 
 @Component({
     selector: 'mc-article',
@@ -28,7 +26,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     error$: Observable<string | null>
     isAuthor$: Observable<boolean>
 
-    constructor(private store: Store, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private store: Store,
+        private activatedRoute: ActivatedRoute,
+        private is: IsService
+    ) {}
 
     ngOnDestroy(): void {
         this.articleSubscription.unsubscribe()
@@ -44,7 +46,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.slug = this.activatedRoute.snapshot.paramMap.get('slug')
         this.isLoading$ = this.store.pipe(select(isLoadingSelector))
         this.error$ = this.store.pipe(select(errorSelector))
-        this.isAuthor$ = this.isAuthor()
+        this.isAuthor$ = this.is.author()
     }
 
     private initializeListeners(): void {
@@ -65,21 +67,5 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     public getProfileUrl(userName: string): string {
         return `${environment.apiUrl}/profiles/${userName}/follow`
-    }
-
-    private isAuthor(): Observable<boolean> {
-        return combineLatest([
-            this.store.pipe(select(articleSelector), filter(Boolean)),
-            this.store.pipe(select(currentUserSelector), filter(Boolean)),
-        ]).pipe(
-            map(
-                ([article, currentUser]: [
-                    ArticleInterface,
-                    CurrentUserInterface
-                ]) => {
-                    return article.author.username === currentUser.username
-                }
-            )
-        )
     }
 }

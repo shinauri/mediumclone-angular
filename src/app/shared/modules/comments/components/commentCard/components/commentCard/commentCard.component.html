@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-block">
+    <p class="card-text">{{commentInput.body}}</p>
+  </div>
+  <div class="card-footer">
+    <a class="comment-author" [routerLink]="['/profiles', commentInput.author.username]">
+      <img class="comment-author-img" src="{{commentInput.author.image}}">
+    </a> &nbsp;
+    <a class="comment-author" [routerLink]="['/profiles', commentInput.author.username]">{{commentInput.author.username}}</a>
+    <span class="date-posted">{{commentInput.createdAt | date}} - {{commentInput.id}}</span>
+    <span class="mod-options" >
+      <mc-loading [loadingText]="'Deleting...'" *ngIf="isDeleting()"></mc-loading>
+      <i class="ion-trash-a"
+         [ngClass]="{
+            errorTrash: errorDelete()
+         }"
+         *ngIf="(isCommentAuthor$ | async) && !isDeleting()"
+         (click)="removeComment(commentInput)"
+      ></i>
+    </span>
+  </div>
+</div>

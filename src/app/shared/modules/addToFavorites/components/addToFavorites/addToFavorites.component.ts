@@ -21,7 +21,6 @@ export class AddToFavoritesComponent implements OnInit {
     constructor(private store: Store) {}
 
     ngOnInit(): void {
-        console.log(this.btnTextInput)
         this.isFavorited = this.isFavoritedInput
         this.favoritesCount = this.favoritesCountInput
     }

@@ -16,6 +16,8 @@ import { DeleteArticleEffect } from 'src/app/article/store/effects/deleteArticle
 import { GetArticleEffect } from 'src/app/article/store/effects/getArticle.effect'
 import { FollowModule } from 'src/app/shared/modules/follow/follow.module'
 import { AddToFavoritesModule } from 'src/app/shared/modules/addToFavorites/addToFavorites.module'
+import { CommentsModule } from 'src/app/shared/modules/comments/comments.module'
+import { IsService } from 'src/app/shared/services/is.service'
 
 const routes = [
     {
@@ -35,8 +37,9 @@ const routes = [
         TagListModule,
         FollowModule,
         AddToFavoritesModule,
+        CommentsModule,
     ],
     declarations: [ArticleComponent],
-    providers: [ArticleSharedService, ArticleService],
+    providers: [ArticleSharedService, ArticleService, IsService],
 })
 export class ArticleModule {}

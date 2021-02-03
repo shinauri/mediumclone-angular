@@ -49,20 +49,21 @@
     <div class="container page">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
       <mc-error-message *ngIf="error$ | async"></mc-error-message>
-
-     <div class="row article-content" *ngIf="article">
-       <div class="col-xs-12">
-         <div>
-           <p>{{ article.body }}</p>
+     <div *ngIf="article">
+       <div class="row article-content" >
+         <div class="col-xs-12">
+           <div>
+             <p>{{ article.body }}</p>
+           </div>
+           <mc-tag-list [tags]="article.tagList"></mc-tag-list>
          </div>
-         <mc-tag-list [tags]="article.tagList"></mc-tag-list>
        </div>
-     </div>
-     <hr>
-     <div class="row">
-       <div class="col-xs-12 col-md-8 offset-md-2">
-         <div>
-            <mc-comment></mc-comment>
+       <hr>
+       <div class="row">
+         <div class="col-xs-12 col-md-8 offset-md-2">
+           <div>
+             <mc-comments [article]="article"></mc-comments>
+           </div>
          </div>
        </div>
      </div>

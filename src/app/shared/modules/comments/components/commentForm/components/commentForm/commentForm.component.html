@@ -1,8 +1,8 @@
 <mc-backend-error-messages
-  *ngIf="errorsInput"
-  [backendErrors]="errorsInput"
+  *ngIf="backendErrorsInput"
+  [backendErrors]="backendErrorsInput"
 ></mc-backend-error-messages>
-<form class="card comment-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="card comment-form"  [formGroup]="form" (ngSubmit)="onSubmit()">
   <fieldset>
     <div class="card-block">
      <textarea
@@ -13,7 +13,7 @@
      ></textarea>
     </div>
     <div class="card-footer">
-      <img class="comment-author-img" src="null">
+      <img class="comment-author-img" src="{{commentAuthorImgInput}}">
       <button
         class="btn btn-sm btn-primary"
         type="submit"

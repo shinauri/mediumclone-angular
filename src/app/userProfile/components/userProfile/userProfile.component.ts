@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { combineLatest, Observable, Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { select, Store } from '@ngrx/store'
-import { filter, map } from 'rxjs/operators'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 
 import { ProfileInterface } from 'src/app/shared/types/profile.interface'
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface'
 import { environment } from 'src/environments/environment'
 import { getUserProfileAction } from 'src/app/userProfile/store/actions/getUserProfile.action'
 import {
@@ -13,9 +11,7 @@ import {
     isLoadingSelector,
     userProfileSelector,
 } from 'src/app/userProfile/store/selectors'
-import { currentUserSelector } from 'src/app/auth/store/selectors'
-
-type CurrentUser = { isCurrent: boolean }
+import { IsService, CurrentUser } from 'src/app/shared/services/is.service'
 
 @Component({
     selector: 'mc-user-profile',
@@ -38,7 +34,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     constructor(
         private store: Store,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private is: IsService
     ) {}
 
     ngOnDestroy(): void {
@@ -53,7 +50,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private initializeValues(): void {
         this.isLoading$ = this.store.pipe(select(isLoadingSelector))
         this.error$ = this.store.pipe(select(errorSelector))
-        this.profile$ = this.isCurrentUser()
+        this.profile$ = this.is.currentUser()
     }
 
     private initializeListeners(): void {
@@ -94,23 +91,5 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     public getProfileUrl(userName: string): string {
         return `${environment.apiUrl}/profiles/${userName}/follow`
-    }
-
-    private isCurrentUser(): Observable<CurrentUser> {
-        return combineLatest([
-            this.store.pipe(select(userProfileSelector), filter(Boolean)),
-            this.store.pipe(select(currentUserSelector), filter(Boolean)),
-        ]).pipe(
-            map(
-                ([userProfile, currentUser]: [
-                    ProfileInterface,
-                    CurrentUserInterface
-                ]) => {
-                    const isCurrent =
-                        currentUser.username === userProfile.username
-                    return { isCurrent }
-                }
-            )
-        )
     }
 }

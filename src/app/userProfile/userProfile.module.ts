@@ -12,6 +12,7 @@ import { reducers } from 'src/app/userProfile/store/reducers'
 import { FeedModule } from 'src/app/shared/modules/feed/feed.module'
 import { LoadingModule } from 'src/app/shared/modules/loading/loading.module'
 import { FollowModule } from 'src/app/shared/modules/follow/follow.module'
+import { IsService } from 'src/app/shared/services/is.service'
 
 const routes = [
     {
@@ -35,6 +36,6 @@ const routes = [
         FollowModule,
     ],
     declarations: [UserProfileComponent],
-    providers: [UserProfileService],
+    providers: [UserProfileService, IsService],
 })
 export class UserProfileModule {}
