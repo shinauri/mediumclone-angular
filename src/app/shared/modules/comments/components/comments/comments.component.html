@@ -1,0 +1,23 @@
+<mc-comment-form
+  *ngIf="this.currentUser"
+  [commentAuthorImg]="currentUser.image"
+  (commentSubmit)="submitComment($event)"
+></mc-comment-form>
+<mc-loading *ngIf="isLoadingComments$ | async"></mc-loading>
+<mc-error-message
+  *ngIf="(getCommentsError$ | async) as error"
+  [errorMessage]="error.status + ' Comments ' + error.error"
+></mc-error-message>
+<div *ngIf="(comments$ | async) as comments">
+  <mc-comment-card
+    *ngFor="let comment of comments"
+    [deleteCommentsErrors]="deleteCommentsErrors$ | async"
+    [deletedCommentsIds]="deletedCommentsIds$ | async"
+    [comment]="comment"
+    (removeComment)="removeComment($event)"
+  ></mc-comment-card>
+  <span *ngIf="!comments.length">
+    ...No comments yet
+  </span>
+</div>
+

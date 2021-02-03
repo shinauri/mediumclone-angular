@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { CommentFormComponent } from 'src/app/shared/modules/commentForm/components/commentForm/commentForm.component'
 import { BackendErrorMessagesModule } from 'src/app/shared/modules/backendErrorMessages/backendErrorMessages.module'
+import { CommentFormComponent } from 'src/app/shared/modules/comments/components/commentForm/components/commentForm/commentForm.component'
 
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesModule],
